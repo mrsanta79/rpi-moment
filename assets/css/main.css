@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@200;400;600&display=swap');
+* {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 600;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+#app {
+    background: linear-gradient(325deg, #52e6e1, #5552e6, #e652b3, #e67a52, #32ce53);
+    background-size: 1000% 1000%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    -o-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 11% 0%
+    }
+    50% {
+        background-position: 90% 100%
+    }
+    100% {
+        background-position: 11% 0%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 11% 0%
+    }
+    50% {
+        background-position: 90% 100%
+    }
+    100% {
+        background-position: 11% 0%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 11% 0%
+    }
+    50% {
+        background-position: 90% 100%
+    }
+    100% {
+        background-position: 11% 0%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 11% 0%
+    }
+    50% {
+        background-position: 90% 100%
+    }
+    100% {
+        background-position: 11% 0%
+    }
+}

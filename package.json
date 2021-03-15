@@ -1,0 +1,28 @@
+{
+    "name": "raspberry-pi-moment",
+    "version": "1.0.0",
+    "description": "Raspberry Pi Moment is a advanced weather and clock application built for 3.5\" screen using a NodeJS",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon app.js",
+        "start": "pm2 app.js --name rpi-moment"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mrsanta79/rpi-moment.git"
+    },
+    "keywords": [
+        "rpi-moment"
+    ],
+    "author": "Santanu Biswas (dev.sbiswas7991@gmail.com)",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mrsanta79/rpi-moment/issues"
+    },
+    "homepage": "https://github.com/mrsanta79/rpi-moment#readme",
+    "dependencies": {
+        "ejs": "^3.1.6",
+        "express": "^4.17.1"
+    }
+}
