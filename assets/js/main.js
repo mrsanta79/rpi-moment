@@ -15,7 +15,7 @@ let app = new Vue({
         // Fetch data every hour
         setInterval(() => {
             this.getCurrentTemperature();
-        }, 1000 * 60 * 60);
+        }, 1000 * 60 * 10);
     },
     methods: {
         getTodayInfo: function() {
