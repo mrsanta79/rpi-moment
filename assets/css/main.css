@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@200;400;600&family=Inter&display=swap');
 * {
     font-family: 'Comfortaa', sans-serif;
     font-weight: 600;
@@ -7,6 +7,14 @@
 [v-cloak] {
     /* display: none; */
     opacity: 0;
+}
+
+.f-inter {
+    font-family: 'Inter', sans-serif;
+}
+
+.f-comfortaa {
+    font-family: 'Comfortaa', sans-serif;
 }
 
 #app {

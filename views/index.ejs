@@ -48,7 +48,7 @@
                     <button
                         type="button"
                         id="refresh-data"
-                        class="absolute top-1 left-1 text-white hover:bg-gray-500 hover:bg-opacity-50 p-1 rounded-lg transition duration-300 ease-in-out"
+                        class="absolute top-1 left-1 text-white p-1 rounded-lg"
                         v-bind:class="loadingData ? 'animate' : null"
                         v-on:click.prevent="refreshData()"
                     >
@@ -56,7 +56,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
                     </button>
-                    <h1 class="text-4xl text-white" v-cloak>{{ currentTime }}</h1>
+                    <h1 class="text-4xl text-white f-inter" v-cloak>{{ currentTime }}</h1>
                     <h3 class="text-2xl text-white mt-3" v-cloak>{{ currentDate }}</h3>
                 </div>
                 
