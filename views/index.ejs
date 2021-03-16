@@ -56,8 +56,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
                     </button>
-                    <h1 class="text-4xl text-white f-inter" v-cloak>{{ currentTime }}</h1>
-                    <h3 class="text-2xl text-white mt-3" v-cloak>{{ currentDate }}</h3>
+                    <h1 class="text-4xl text-white f-inter" v-cloak>{{ current.time }}</h1>
+                    <h3 class="text-2xl text-white mt-3" v-cloak>{{ current.date }}</h3>
                 </div>
                 
             </div>
@@ -66,15 +66,25 @@
                 <!-- Weather -->
                 <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2">
                     <div class="flex flex-row justify-center items-center">
-                        <img class="w-12 h-12" v-cloak v-bind:src="currentTemperatureIcon">
-                        <h3 class="text-xl text-white ml-1 mt-1" v-cloak>{{ currentTemperature }} &deg;C</h3>
+                        <img class="w-12 h-12" v-cloak v-bind:src="current.tempIcon">
+                        <h3 class="text-xl text-white ml-1 mt-1" v-cloak>{{ current.temp }} &deg;C</h3>
                     </div>
-                    <h6 class="text-base text-white mt-2" v-cloak>{{ currentTemperatureType }}</h6>
-                    <h6 class="text-xs text-white mt-3" v-cloak>Sunrise: {{ sunrise }}</h6>
-                    <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ sunset }}</h6>
+                    <h6 class="text-base text-white mt-2" v-cloak>{{ current.tempType }}</h6>
+                    <h6 class="text-xs text-white mt-3" v-cloak>Sunrise: {{ current.sunrise }}</h6>
+                    <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ current.sunset }}</h6>
                 </div>
 
 
+            </div>
+
+            <!-- Network Connection Notifier -->
+            <div 
+                id="network-notifier" 
+                class="fixed bottom-0 left-0 right-0 h-14 text-white text-lg border-t-2 border-white flex flex-col justify-center items-center"
+                v-cloak
+                v-bind:class="network.notifierVisible ? 'visible' : ''"
+            >
+                {{ network.notifierText }}
             </div>
         </div>
     </div>

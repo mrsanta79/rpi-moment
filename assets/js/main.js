@@ -2,13 +2,20 @@ let app = new Vue({
     el: '#app',
     data: {
         loadingData: false,
-        currentTime: '-- : -- : --',
-        currentDate: '-',
-        currentTemperature: '-',
-        currentTemperatureIcon: '',
-        currentTemperatureType: '-',
-        sunrise: '-- : -- : --',
-        sunset: '-- : -- : --',
+        network: {
+            isConnected: true,
+            notifierVisible: false,
+            notifierText: ''
+        },
+        current: {
+            time: '-- : -- : --',
+            date: '-',
+            temp: '-',
+            tempIcon: null,
+            tempType: '-',
+            sunrise: '-- : -- : --',
+            sunset: '-- : -- : --',
+        },
     },
     created() {
         this.getTodayInfo();
@@ -18,6 +25,21 @@ let app = new Vue({
         setInterval(() => {
             this.getCurrentTemperature();
         }, 1000 * 60 * 10);
+
+        // Check Internet connection availablity
+        window.addEventListener('offline', (event) => {
+            this.network.notifierText = 'Internet Connection Lost!';
+            this.network.isConnected = false;
+            this.network.notifierVisible = true;
+        });
+        window.addEventListener('online', (event) => {
+            this.network.notifierText = 'Internet Connection Restored!';
+            this.network.isConnected = true;
+            this.network.notifierVisible = true;
+            setTimeout(() => {
+                this.network.notifierVisible = false;
+            }, 3000);
+        })
     },
     methods: {
         getTodayInfo: function() {
@@ -27,8 +49,8 @@ let app = new Vue({
                 const date = moment(today).format('MMM Do YYYY');
                 const time = moment(today).format('hh : mm A');
 
-                this.currentDate = day + ', ' + date;
-                this.currentTime = time;
+                this.current.date = day + ', ' + date;
+                this.current.time = time;
             }, 1000);
         },
         getCurrentTemperature: function() {
@@ -45,23 +67,23 @@ let app = new Vue({
                 .then(response => {
                     console.log(moment().format('hh : mm A'));
 
-                    this.currentTemperature = response.main.temp - 273.15;
-                    this.currentTemperatureIcon = weatherIconUrl + response.weather[0].icon + '@2x.png';
-                    this.currentTemperatureType = response.weather[0].main;
-                    this.sunrise = moment(new Date(response.sys.sunrise * 1000)).format('hh:mm A');
-                    this.sunset = moment(new Date(response.sys.sunset * 1000)).format('hh:mm A');
-                });
+                    this.current.temp = response.main.temp - 273.15;
+                    this.current.tempIcon = weatherIconUrl + response.weather[0].icon + '@2x.png';
+                    this.current.tempType = response.weather[0].main;
+                    this.current.sunrise = moment(new Date(response.sys.sunrise * 1000)).format('hh:mm A');
+                    this.current.sunset = moment(new Date(response.sys.sunset * 1000)).format('hh:mm A');
+                }).catch(err => {
+                    console.log(err);
+                })
         },
         refreshData: function() {
-            // this.loadingData = true;
-            // this.getTodayInfo();
-            // this.getCurrentTemperature();
+            this.loadingData = true;
+            this.getTodayInfo();
+            this.getCurrentTemperature();
 
-            // setTimeout(() => {
-            //     this.loadingData = false;
-            // }, 1100)
-
-            window.location.reload();
+            setTimeout(() => {
+                this.loadingData = false;
+            }, 1100)
         }
     }
 });
