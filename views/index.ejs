@@ -44,11 +44,11 @@
             
             <!-- Clock -->
             <div class="grid grid-cols-3 gap-3 h-full">
-                <div class="col-span-2 flex flex-col justify-center items-center border shadow-2xl rounded-lg p-5 relative">
+                <div class="col-span-2 flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
                     <button
                         type="button"
                         id="refresh-data"
-                        class="absolute top-1 left-1 text-white p-1 rounded-lg"
+                        class="absolute top-1 left-1 text-white p-1 rounded-full"
                         v-bind:class="loadingData ? 'animate' : null"
                         v-on:click.prevent="refreshData()"
                     >
@@ -64,7 +64,7 @@
             <div class="mt-3 grid grid-cols-3 gap-3 h-full">
 
                 <!-- Weather -->
-                <div class="flex flex-col justify-center items-center border shadow-2xl rounded-lg p-3">
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2">
                     <div class="flex flex-row justify-center items-center">
                         <img class="w-12 h-12" v-cloak v-bind:src="currentTemperatureIcon">
                         <h3 class="text-xl text-white ml-1 mt-1" v-cloak>{{ currentTemperature }} &deg;C</h3>
