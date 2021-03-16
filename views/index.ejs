@@ -42,8 +42,10 @@
         <!-- Body -->
         <div class="flex flex-col h-screen p-3 border-box">
             
-            <!-- Clock -->
+            <!-- Top Row -->
             <div class="grid grid-cols-3 gap-3 h-full">
+
+                <!-- Clock -->
                 <div class="col-span-2 flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
 
                     <!-- Refresh Button -->
@@ -72,8 +74,14 @@
                     <h1 class="text-4xl text-white f-inter" v-cloak>{{ current.time }}</h1>
                     <h3 class="text-2xl text-white mt-3" v-cloak>{{ current.date }}</h3>
                 </div>
+
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
+                    
+                </div>
                 
             </div>
+
+            <!-- Bottom Row -->
             <div class="mt-3 grid grid-cols-3 gap-3 h-full">
 
                 <!-- Weather -->
@@ -87,7 +95,13 @@
                     <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ current.sunset }}</h6>
                 </div>
 
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
+                    
+                </div>
 
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
+                    
+                </div>
             </div>
 
             <!-- Network Connection Notifier -->
