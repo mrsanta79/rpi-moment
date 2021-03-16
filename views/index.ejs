@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="weather-api-key" content="<%= WEATHER_API_KEY %>">
+    <meta name="location-city" content="<%= LOCATION.CITY %>">
+    <meta name="location-state" content="<%= LOCATION.STATE_CODE %>">
+    <meta name="location-country" content="<%= LOCATION.COUNTRY_CODE %>">
+
     <title>RPi Moment</title>
 
     <!-- CSS FIles -->
@@ -15,16 +20,46 @@
 <body>
 
     <div class="min-h-screen bg-gradient-to-r from-purple-400 to-green-400" id="app">
-        <div class="p-3 border-box">
-            <div class="grid grid-cols-3 gap-3">
+        <!-- Screen Loader -->
+        <div id="loader" class="fixed top-0 left-0 right-0 h-full bg-gray-800 z-50 flex flex-col justify-center items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background: transparent;display:block;" width="150px" height="150px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                <g transform="translate(50 50)">
+                    <g ng-attr-transform="scale(0.8)">
+                        <g transform="translate(-50 -50)">
+                            <path fill="#85a2b6" stroke="#e15b64" stroke-width="0" d="M50,14c19.85,0,36,16.15,36,36S69.85,86,50,86S14,69.85,14,50S30.15,14,50,14 M50,10c-22.091,0-40,17.909-40,40 s17.909,40,40,40s40-17.909,40-40S72.091,10,50,10L50,10z"></path>
+                            <path fill="#bbcedd" d="M52.78,42.506c-0.247-0.092-0.415-0.329-0.428-0.603L52.269,40l-0.931-21.225C51.304,18.06,50.716,17.5,50,17.5 s-1.303,0.56-1.338,1.277L47.731,40l-0.083,1.901c-0.013,0.276-0.181,0.513-0.428,0.604c-0.075,0.028-0.146,0.063-0.22,0.093V44h6 v-1.392C52.925,42.577,52.857,42.535,52.78,42.506z">
+                                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="0.4166666666666667s"></animateTransform>
+                            </path>
+                            <path fill="#bbcedd" d="M58.001,48.362c-0.634-3.244-3.251-5.812-6.514-6.391c-3.846-0.681-7.565,1.35-9.034,4.941 c-0.176,0.432-0.564,0.717-1.013,0.744l-15.149,0.97c-0.72,0.043-1.285,0.642-1.285,1.383c0,0.722,0.564,1.321,1.283,1.363 l15.153,0.971c0.447,0.027,0.834,0.312,1.011,0.744c1.261,3.081,4.223,5.073,7.547,5.073c2.447,0,4.744-1.084,6.301-2.975 C57.858,53.296,58.478,50.808,58.001,48.362z M50,53.06c-1.688,0-3.06-1.373-3.06-3.06s1.373-3.06,3.06-3.06s3.06,1.373,3.06,3.06 S51.688,53.06,50,53.06z">
+                                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.6666666666666667s"></animateTransform>
+                            </path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Body -->
+        <div class="flex flex-col h-screen p-3 border-box">
+            
+            <!-- Clock -->
+            <div class="grid grid-cols-3 gap-3 h-full">
                 <div class="col-span-2 flex flex-col justify-center items-center border shadow-2xl rounded-lg p-5">
                     <h1 class="text-4xl text-white" v-cloak>{{ currentTime }}</h1>
                     <h3 class="text-2xl text-white mt-3" v-cloak>{{ currentDate }}</h3>
                 </div>
+                
+            </div>
+            <div class="mt-3 grid grid-cols-3 gap-3 h-full">
+
+                <!-- Weather -->
                 <div class="flex flex-col justify-center items-center border shadow-2xl rounded-lg p-3">
-                    <img class="w-11 h-11" src="https://www.pngrepo.com/download/102469/rainy.png" style="filter: invert(1);">
-                    <h3 class="text-2xl text-white mt-3">42 &deg;C</h3>
+                    <img class="w-12 h-12" v-cloak v-bind:src="currentTemperatureIcon">
+                    <h3 class="text-2xl text-white mt-3" v-cloak>{{ currentTemperature }} &deg;C</h3>
+                    <h6 class="text-base text-white mt-2" v-cloak>{{ currentTemperatureType }}</h6>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -35,6 +70,18 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const $pageLoader = document.getElementById('loader');
+            
+            setTimeout(() => {
+                $pageLoader.style.top = '-' + document.body.clientHeight + 'px';
+                setTimeout(() => {
+                    $pageLoader.parentElement.removeChild($pageLoader);
+                }, 600)
+            }, 1000);
+        })
+    </script>
 </body>
 
 </html>

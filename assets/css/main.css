@@ -5,7 +5,8 @@
 }
 
 [v-cloak] {
-    display: none;
+    /* display: none; */
+    opacity: 0;
 }
 
 #app {
@@ -15,6 +16,11 @@
     -moz-animation: AnimationName 30s ease infinite;
     -o-animation: AnimationName 30s ease infinite;
     animation: AnimationName 30s ease infinite;
+}
+
+#loader {
+    top: 0;
+    transition: top 0.5s ease-in-out;
 }
 
 @-webkit-keyframes AnimationName {
