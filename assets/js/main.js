@@ -7,6 +7,8 @@ let app = new Vue({
         currentTemperature: '-',
         currentTemperatureIcon: '',
         currentTemperatureType: '-',
+        sunrise: '-- : -- : --',
+        sunset: '-- : -- : --',
     },
     created() {
         this.getTodayInfo();
@@ -46,6 +48,8 @@ let app = new Vue({
                     this.currentTemperature = response.main.temp - 273.15;
                     this.currentTemperatureIcon = weatherIconUrl + response.weather[0].icon + '@2x.png';
                     this.currentTemperatureType = response.weather[0].main;
+                    this.sunrise = moment(new Date(response.sys.sunrise * 1000)).format('hh : mm A');
+                    this.sunset = moment(new Date(response.sys.sunset * 1000)).format('hh : mm A');
                 });
         },
         refreshData: function() {
