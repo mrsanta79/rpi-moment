@@ -1,6 +1,7 @@
 let app = new Vue({
     el: '#app',
     data: {
+        loadingData: false,
         currentTime: '-- : -- : --',
         currentDate: '-',
         currentTemperature: '-',
@@ -10,6 +11,11 @@ let app = new Vue({
     created() {
         this.getTodayInfo();
         this.getCurrentTemperature();
+
+        // Fetch data every hour
+        setInterval(() => {
+            this.getCurrentTemperature();
+        }, 1000 * 60 * 60);
     },
     methods: {
         getTodayInfo: function() {
@@ -32,15 +38,24 @@ let app = new Vue({
             const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY},${STATE},${COUNTRY}&appid=${API_KEY}`;
             const weatherIconUrl = `https://openweathermap.org/img/wn/`;
 
-            // setInterval(() => {
-            fetch(weatherUrl).then(data => data.json())
+            fetch(weatherUrl)
+                .then(data => data.json())
                 .then(response => {
-                    console.log(response);
+                    console.log(moment().format('hh : mm A'));
+
                     this.currentTemperature = response.main.temp - 273.15;
                     this.currentTemperatureIcon = weatherIconUrl + response.weather[0].icon + '@2x.png';
                     this.currentTemperatureType = response.weather[0].main;
-                })
-                // }, 60000);
+                });
+        },
+        refreshData: function() {
+            this.loadingData = true;
+            this.getTodayInfo();
+            this.getCurrentTemperature();
+
+            setTimeout(() => {
+                this.loadingData = false;
+            }, 1100)
         }
     }
 });

@@ -23,6 +23,19 @@
     transition: top 0.5s ease-in-out;
 }
 
+#refresh-data.animate svg {
+    animation: spin 1s linear 1;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
 @-webkit-keyframes AnimationName {
     0% {
         background-position: 11% 0%
