@@ -53,13 +53,15 @@ let app = new Vue({
                 });
         },
         refreshData: function() {
-            this.loadingData = true;
-            this.getTodayInfo();
-            this.getCurrentTemperature();
+            // this.loadingData = true;
+            // this.getTodayInfo();
+            // this.getCurrentTemperature();
 
-            setTimeout(() => {
-                this.loadingData = false;
-            }, 1100)
+            // setTimeout(() => {
+            //     this.loadingData = false;
+            // }, 1100)
+
+            window.location.reload();
         }
     }
 });
