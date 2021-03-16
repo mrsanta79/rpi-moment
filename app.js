@@ -17,16 +17,12 @@ app.use('/assets', express.static(path.join(__dirname, '/assets')));
 
 // Routes
 app.get('/', (req, res) => {
-    const data = {
-        WEATHER_API_KEY: process.env.WEATHER_API_KEY,
-        LOCATION: {
-            CITY: process.env.CITY,
-            STATE_CODE: process.env.STATE_CODE,
-            COUNTRY_CODE: process.env.COUNTRY_CODE
-        }
-    };
+    res.status(200).render('index');
+});
 
-    res.status(200).render('index', data);
-})
+app.use((req, res, ) => {
+    res.status(404).send('Route not found!');
+});
 
+// Start server
 app.listen(process.env.APP_PORT || 3000);

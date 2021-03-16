@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="weather-api-key" content="<%= WEATHER_API_KEY %>">
-    <meta name="location-city" content="<%= LOCATION.CITY %>">
-    <meta name="location-state" content="<%= LOCATION.STATE_CODE %>">
-    <meta name="location-country" content="<%= LOCATION.COUNTRY_CODE %>">
+    <meta name="weather-api-key" content="<%= process.env.WEATHER_API_KEY %>">
+    <meta name="location-city" content="<%= process.env.CITY %>">
+    <meta name="location-state" content="<%= process.env.STATE_CODE %>">
+    <meta name="location-country" content="<%= process.env.COUNTRY_CODE %>">
 
     <title>RPi Moment</title>
 
