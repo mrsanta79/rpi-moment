@@ -5,7 +5,6 @@ let app = new Vue({
         network: {
             isConnected: true,
             notifierVisible: false,
-            notifierText: ''
         },
         current: {
             time: '-- : -- : --',
@@ -28,12 +27,13 @@ let app = new Vue({
 
         // Check Internet connection availablity
         window.addEventListener('offline', (event) => {
-            this.network.notifierText = 'Internet Connection Lost!';
             this.network.isConnected = false;
             this.network.notifierVisible = true;
+            setTimeout(() => {
+                this.network.notifierVisible = false;
+            }, 3000);
         });
         window.addEventListener('online', (event) => {
-            this.network.notifierText = 'Internet Connection Restored!';
             this.network.isConnected = true;
             this.network.notifierVisible = true;
             setTimeout(() => {
