@@ -20,10 +20,10 @@
 #app {
     background: linear-gradient(325deg, #52e6e1, #5552e6, #e652b3, #e67a52, #32ce53);
     background-size: 1000% 1000%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    -o-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
+    -webkit-animation: background-gradient 30s ease infinite;
+    -moz-animation: background-gradient 30s ease infinite;
+    -o-animation: background-gradient 30s ease infinite;
+    animation: background-gradient 30s ease infinite;
 }
 
 #loader {
@@ -32,6 +32,9 @@
 }
 
 #refresh-data.animate svg {
+    -webkit-animation: spin 1s linear 1;
+    -moz-animation: spin 1s linear 1;
+    -o-animation: spin 1s linear 1;
     animation: spin 1s linear 1;
 }
 
@@ -51,6 +54,36 @@
     backdrop-filter: blur(5px);
 }
 
+
+/* Animations */
+
+@-webkit-keyframes spin {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@-moz-keyframes spin {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@-o-keyframes spin {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
 @keyframes spin {
     from {
         transform: rotate(360deg);
@@ -60,7 +93,7 @@
     }
 }
 
-@-webkit-keyframes AnimationName {
+@-webkit-keyframes background-gradient {
     0% {
         background-position: 11% 0%
     }
@@ -72,7 +105,7 @@
     }
 }
 
-@-moz-keyframes AnimationName {
+@-moz-keyframes background-gradient {
     0% {
         background-position: 11% 0%
     }
@@ -84,7 +117,7 @@
     }
 }
 
-@-o-keyframes AnimationName {
+@-o-keyframes background-gradient {
     0% {
         background-position: 11% 0%
     }
@@ -96,7 +129,7 @@
     }
 }
 
-@keyframes AnimationName {
+@keyframes background-gradient {
     0% {
         background-position: 11% 0%
     }

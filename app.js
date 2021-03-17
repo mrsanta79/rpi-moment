@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
-const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Initialize app
@@ -20,7 +19,7 @@ app.get('/', (req, res) => {
     res.status(200).render('index');
 });
 
-app.use((req, res, ) => {
+app.use((req, res) => {
     res.status(404).send('Route not found!');
 });
 
