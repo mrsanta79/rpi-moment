@@ -9,6 +9,8 @@
     <meta name="location-city" content="<%= process.env.CITY %>">
     <meta name="location-state" content="<%= process.env.STATE_CODE %>">
     <meta name="location-country" content="<%= process.env.COUNTRY_CODE %>">
+    <meta name="crypto-currency-code" content="<%= process.env.CRYPTO_CURRENCY_CODE %>">
+    <meta name="currency-code" content="<%= process.env.CURRENCY_CODE %>">
 
     <title>RPi Moment</title>
 
@@ -46,7 +48,7 @@
             <div class="grid grid-cols-3 gap-3 h-full">
 
                 <!-- Clock -->
-                <div class="col-span-2 flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
+                <div class="col-span-2 flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2 relative">
 
                     <!-- Refresh Button -->
                     <button
@@ -75,7 +77,7 @@
                     <h3 class="text-2xl text-white mt-3" v-cloak>{{ current.date }}</h3>
                 </div>
 
-                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2 relative">
                     
                 </div>
                 
@@ -95,12 +97,19 @@
                     <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ current.sunset }}</h6>
                 </div>
 
-                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2 relative">
                     
                 </div>
 
-                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-5 relative">
-                    
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2 relative">
+                    <h6 class="text-base text-white">1 <%= process.env.CRYPTO_CURRENCY_CODE %></h6>
+                    <span class="text-white">=</span>
+                    <h6 class="text-base text-white" v-cloak>
+                        {{ crypto.rate }}
+                        <span class="text-xs"><%= process.env.CURRENCY_CODE %></span>
+                    </h6>
+                    <h6 class="text-xs text-white mt-3">Last refreshed at: </h6>
+                    <h6 class="text-xs text-white mt-1">{{ crypto.refreshedAt }}</h6>
                 </div>
             </div>
 

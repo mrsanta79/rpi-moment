@@ -15,15 +15,25 @@ let app = new Vue({
             sunrise: '-- : -- : --',
             sunset: '-- : -- : --',
         },
+        crypto: {
+            rate: '0',
+            refreshedAt: '-- : -- : --'
+        }
     },
     created() {
         this.getTodayInfo();
         this.getCurrentTemperature();
+        this.getCryptoRates();
 
-        // Fetch data every hour
+        // Fetch weather data every 10 mins
         setInterval(() => {
             this.getCurrentTemperature();
         }, 1000 * 60 * 10);
+
+        // Fetch crypto rates every hour
+        setInterval(() => {
+            this.getCryptoRates();
+        }, 1000 * 60 * 60);
 
         // Check Internet connection availablity
         window.addEventListener('offline', (event) => {
@@ -76,10 +86,33 @@ let app = new Vue({
                     console.log(err);
                 })
         },
+        getCryptoRates: function() {
+            const CRYPTO_CURRENCY_CODE = document.querySelector('meta[name=crypto-currency-code]').getAttribute('content');
+            const CURRENCY_CODE = document.querySelector('meta[name=currency-code]').getAttribute('content');
+
+            const url = `https://api.exchangerate.host/latest?base=${CRYPTO_CURRENCY_CODE}&symbols=${CURRENCY_CODE}`;
+
+            fetch(url)
+                .then(data => data.json())
+                .then(response => {
+                    if (response.success) {
+                        let rate = Math.round(response.rates[CURRENCY_CODE]);
+                        rate = rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                        this.crypto.rate = rate;
+                        this.crypto.refreshedAt = moment().format('hh : mm A');
+                    } else {
+                        console.log(response);
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+        },
         refreshData: function() {
             this.loadingData = true;
             this.getTodayInfo();
             this.getCurrentTemperature();
+            this.getCryptoRates();
 
             setTimeout(() => {
                 this.loadingData = false;
