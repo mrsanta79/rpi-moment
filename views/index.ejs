@@ -96,10 +96,7 @@
                     <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ current.sunset }}</h6>
                 </div>
 
-                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2 relative">
-                    
-                </div>
-
+                <!-- Cryptocurrency Info -->
                 <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2 relative">
                     <h6 class="text-base text-white">1 <%= process.env.CRYPTO_CURRENCY_CODE %></h6>
                     <span class="text-white">=</span>
@@ -109,6 +106,10 @@
                     </h6>
                     <h6 class="text-xs text-white mt-3">Last refreshed at: </h6>
                     <h6 class="text-xs text-white mt-1">{{ crypto.refreshedAt }}</h6>
+                </div>
+                
+                <div class="flex flex-col justify-center items-center border-2 shadow-2xl rounded-xl p-2 relative">
+                    
                 </div>
             </div>
 
