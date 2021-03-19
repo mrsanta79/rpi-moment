@@ -73,6 +73,8 @@ let app = new Vue({
             const STATE = document.querySelector('meta[name=location-state]').getAttribute('content');
             const COUNTRY = document.querySelector('meta[name=location-country]').getAttribute('content');
 
+            const unitKelvin = 273.15;
+
             const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY},${STATE},${COUNTRY}&appid=${API_KEY}`;
             const weatherIconUrl = `https://openweathermap.org/img/wn/`;
 
@@ -81,7 +83,7 @@ let app = new Vue({
                 .then(response => {
                     console.log(moment().format('hh : mm A'));
 
-                    this.current.temp = Math.round(response.main.temp - 273.15);
+                    this.current.temp = Math.round(response.main.temp - unitKelvin);
                     this.current.tempIcon = weatherIconUrl + response.weather[0].icon + '@2x.png';
                     this.current.tempType = response.weather[0].main;
                     this.current.sunrise = moment(new Date(response.sys.sunrise * 1000)).format('hh:mm A');
