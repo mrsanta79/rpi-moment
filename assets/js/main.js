@@ -61,7 +61,7 @@ let app = new Vue({
                 const today = new Date();
                 const day = moment(today).format('ddd');
                 const date = moment(today).format('MMM Do YYYY');
-                const time = moment(today).format('hh : mm : ss A');
+                const time = moment(today).format('hh : mm A');
 
                 this.current.date = day + ', ' + date;
                 this.current.time = time;
