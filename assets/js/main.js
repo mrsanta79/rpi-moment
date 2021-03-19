@@ -18,14 +18,14 @@ let app = new Vue({
         crypto: {
             rate: '0',
             refreshedAt: '-- : -- : --'
-        }
+        },
     },
     created() {
         this.getTodayInfo();
         this.getCurrentTemperature();
         this.getCryptoRates();
 
-        // Fetch weather data every 10 mins
+        // Fetch weather data every 10 minutes
         setInterval(() => {
             this.getCurrentTemperature();
         }, 1000 * 60 * 10);
@@ -34,6 +34,11 @@ let app = new Vue({
         setInterval(() => {
             this.getCryptoRates();
         }, 1000 * 60 * 60);
+
+        // Fetch device hardware and time every second
+        setInterval(() => {
+            this.getTodayInfo();
+        }, 1000);
 
         // Check Internet connection availablity
         window.addEventListener('offline', (event) => {
@@ -57,15 +62,13 @@ let app = new Vue({
     },
     methods: {
         getTodayInfo: function() {
-            setInterval(() => {
-                const today = new Date();
-                const day = moment(today).format('ddd');
-                const date = moment(today).format('MMM Do YYYY');
-                const time = moment(today).format('hh : mm A');
+            const today = new Date();
+            const day = moment(today).format('ddd');
+            const date = moment(today).format('MMM Do YYYY');
+            const time = moment(today).format('hh : mm A');
 
-                this.current.date = day + ', ' + date;
-                this.current.time = time;
-            }, 1000);
+            this.current.date = day + ', ' + date;
+            this.current.time = time;
         },
         getCurrentTemperature: function() {
             const API_KEY = document.querySelector('meta[name=weather-api-key]').getAttribute('content');
