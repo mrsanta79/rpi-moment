@@ -77,7 +77,7 @@ let app = new Vue({
                 .then(response => {
                     console.log(moment().format('hh : mm A'));
 
-                    this.current.temp = response.main.temp - 273.15;
+                    this.current.temp = Math.round(response.main.temp - 273.15);
                     this.current.tempIcon = weatherIconUrl + response.weather[0].icon + '@2x.png';
                     this.current.tempType = response.weather[0].main;
                     this.current.sunrise = moment(new Date(response.sys.sunrise * 1000)).format('hh:mm A');
