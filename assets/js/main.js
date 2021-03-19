@@ -46,6 +46,10 @@ let app = new Vue({
         window.addEventListener('online', (event) => {
             this.network.isConnected = true;
             this.network.notifierVisible = true;
+
+            // Refresh data as soon as network connected
+            this.refreshData();
+
             setTimeout(() => {
                 this.network.notifierVisible = false;
             }, 3000);
