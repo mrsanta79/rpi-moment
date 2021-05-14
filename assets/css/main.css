@@ -18,16 +18,12 @@
 }
 
 #app {
-    background: linear-gradient(325deg, #52e6e1, #5552e6, #e652b3, #e67a52, #32ce53);
-    background-size: 1000% 1000%;
-    -webkit-animation: background-gradient 30s ease infinite;
-    -moz-animation: background-gradient 30s ease infinite;
-    -o-animation: background-gradient 30s ease infinite;
-    animation: background-gradient 30s ease infinite;
+    background: #58818a;
 }
 
 #loader {
     top: 0;
+    background: #30475e;
     transition: top 0.5s ease-in-out;
 }
 
@@ -52,6 +48,31 @@
 #fetch-error {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
+}
+
+
+/* Control Center */
+
+.btn-control-center {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.btn-control-center.active {
+    background: #fff;
+}
+
+.btn-control-center.active svg {
+    stroke: #30475e;
+}
+
+#brightness-slider-wrapper {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+#brightness-slider-wrapper #brightness-slider {
+    min-height: 1%;
+    height: 15%;
+    max-height: 100%;
 }
 
 
@@ -90,53 +111,5 @@
     }
     to {
         transform: rotate(0deg);
-    }
-}
-
-@-webkit-keyframes background-gradient {
-    0% {
-        background-position: 11% 0%
-    }
-    50% {
-        background-position: 90% 100%
-    }
-    100% {
-        background-position: 11% 0%
-    }
-}
-
-@-moz-keyframes background-gradient {
-    0% {
-        background-position: 11% 0%
-    }
-    50% {
-        background-position: 90% 100%
-    }
-    100% {
-        background-position: 11% 0%
-    }
-}
-
-@-o-keyframes background-gradient {
-    0% {
-        background-position: 11% 0%
-    }
-    50% {
-        background-position: 90% 100%
-    }
-    100% {
-        background-position: 11% 0%
-    }
-}
-
-@keyframes background-gradient {
-    0% {
-        background-position: 11% 0%
-    }
-    50% {
-        background-position: 90% 100%
-    }
-    100% {
-        background-position: 11% 0%
     }
 }

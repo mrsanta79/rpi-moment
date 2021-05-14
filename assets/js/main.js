@@ -15,27 +15,24 @@ let app = new Vue({
             sunrise: '-- : -- : --',
             sunset: '-- : -- : --',
         },
-        crypto: {
-            rate: '0',
-            refreshedAt: '-- : -- : --'
-        },
+        upcoming: [
+            { day: '-', tempMax: '-', tempMin: '-', tempIcon: null, tempType: '-' },
+            { day: '-', tempMax: '-', tempMin: '-', tempIcon: null, tempType: '-' },
+            { day: '-', tempMax: '-', tempMin: '-', tempIcon: null, tempType: '-' },
+        ]
     },
     created() {
         this.getTodayInfo();
-        this.getCurrentTemperature();
-        this.getCryptoRates();
+        this.getCurrentWeather();
+        this.getUpcomingWheather();
 
-        // Fetch weather data every 10 minutes
+        // Fetch weather data every 60 minutes
         setInterval(() => {
-            this.getCurrentTemperature();
-        }, 1000 * 60 * 10);
-
-        // Fetch crypto rates every hour
-        setInterval(() => {
-            this.getCryptoRates();
+            this.getCurrentWeather();
+            this.getUpcomingWheather();
         }, 1000 * 60 * 60);
 
-        // Fetch device hardware and time every second
+        // Fetch time every second
         setInterval(() => {
             this.getTodayInfo();
         }, 1000);
@@ -69,8 +66,16 @@ let app = new Vue({
 
             this.current.date = day + ', ' + date;
             this.current.time = time;
+
+            // Get upcoming days
+            this.upcoming.forEach((upDay, index) => {
+                const upcomingDay = new Date(today);
+                upcomingDay.setDate(upcomingDay.getDate() + (index + 1));
+
+                this.upcoming[index].day = moment(upcomingDay).format('ddd');
+            });
         },
-        getCurrentTemperature: function() {
+        getCurrentWeather: function() {
             const API_KEY = document.querySelector('meta[name=weather-api-key]').getAttribute('content');
             const CITY = document.querySelector('meta[name=location-city]').getAttribute('content');
             const STATE = document.querySelector('meta[name=location-state]').getAttribute('content');
@@ -84,8 +89,6 @@ let app = new Vue({
             fetch(weatherUrl)
                 .then(data => data.json())
                 .then(response => {
-                    console.log(moment().format('hh : mm A'));
-
                     this.current.temp = Math.round(response.main.temp - unitKelvin);
                     this.current.tempIcon = weatherIconUrl + response.weather[0].icon + '@2x.png';
                     this.current.tempType = response.weather[0].main;
@@ -95,23 +98,26 @@ let app = new Vue({
                     console.log(err);
                 })
         },
-        getCryptoRates: function() {
-            const CRYPTO_CURRENCY_CODE = document.querySelector('meta[name=crypto-currency-code]').getAttribute('content');
-            const CURRENCY_CODE = document.querySelector('meta[name=currency-code]').getAttribute('content');
+        getUpcomingWheather: function() {
+            const API_KEY = document.querySelector('meta[name=weather-api-key]').getAttribute('content');
+            const CITY = document.querySelector('meta[name=location-city]').getAttribute('content');
 
-            const url = `https://api.exchangerate.host/latest?base=${CRYPTO_CURRENCY_CODE}&symbols=${CURRENCY_CODE}`;
+            const unitKelvin = 273.15;
+            const dayCount = 3;
 
-            fetch(url)
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&cnt=${dayCount}&appid=${API_KEY}`;
+            const weatherIconUrl = `https://openweathermap.org/img/wn/`;
+
+            fetch(weatherUrl)
                 .then(data => data.json())
                 .then(response => {
-                    if (response.success) {
-                        let rate = Math.round(response.rates[CURRENCY_CODE]);
-                        rate = rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                        this.crypto.rate = rate;
-                        this.crypto.refreshedAt = moment().format('hh : mm A');
-                    } else {
-                        console.log(response);
+                    if (response.list.length) {
+                        response.list.forEach((day, index) => {
+                            this.upcoming[index].tempMax = Math.round(day.main.temp_max - unitKelvin);
+                            this.upcoming[index].tempMin = Math.round(day.main.temp_min - unitKelvin);
+                            this.upcoming[index].tempIcon = weatherIconUrl + day.weather[0].icon + '@2x.png';
+                            this.upcoming[index].tempType = day.weather[0].main;
+                        });
                     }
                 }).catch(err => {
                     console.log(err);
@@ -120,7 +126,7 @@ let app = new Vue({
         refreshData: function() {
             this.loadingData = true;
             this.getTodayInfo();
-            this.getCurrentTemperature();
+            this.getCurrentWeather();
             this.getCryptoRates();
 
             setTimeout(() => {
