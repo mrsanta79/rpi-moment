@@ -21,7 +21,7 @@
 
 <body>
 
-    <div class="min-h-screen bg-gradient-to-r from-purple-400 to-green-400" id="app">
+    <div class="min-h-screen bg-gradient-to-r from-purple-400 to-green-400" id="app" x-data="{ isPoweroffScreenVisible: false, poweroffSelectionText: 'Cancel' }">
         <!-- Screen Loader -->
         <div id="loader" class="fixed top-0 left-0 right-0 h-full z-50 flex flex-col justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background: transparent;display:block;" width="150px" height="150px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -68,13 +68,13 @@
                     </svg>
 
                     <!-- Alarm -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm absolute top-1 right-9 w-5 h-5" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm absolute top-1 right-9 w-5 h-5" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <circle cx="12" cy="13" r="7" />
                         <polyline points="12 10 12 13 14 13" />
                         <line x1="7" y1="4" x2="4.25" y2="6" />
                         <line x1="17" y1="4" x2="19.75" y2="6" />
-                    </svg>
+                    </svg> -->
 
                     <!-- Time and Date -->
                     <h1 class="text-4xl text-white f-inter mt-3" v-cloak>{{ current.time }}</h1>
@@ -93,7 +93,7 @@
                         </button>
 
                         <!-- Shutdown Button-->
-                        <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 mt-1 h-1/2 inline-flex justify-center items-center focus:outline-none">
+                        <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 mt-1 h-1/2 inline-flex justify-center items-center focus:outline-none" x-on:click.prevent="isPoweroffScreenVisible = true">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power w-8 h-8" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M7 6a7.75 7.75 0 1 0 10 0" />
@@ -165,13 +165,67 @@
                     <h6 class="text-lg text-white mt-1">Back online!</h6>
                 </div>
             </div>
+
+            <!-- Poweroff Screen -->
+            <div class="fixed inset-0 bg-red z-10 flex flex-row justify-evenly items-center" id="poweroff-screen" x-show.transition.opacity.scale="isPoweroffScreenVisible">
+                <!-- Exit System -->
+                <button
+                    type="button"
+                    class="p-4 rounded-full focus:outline-none"
+                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
+                    x-on:click="poweroffSelectionText = 'Exiting...'"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                        <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                    </svg>
+                </button>
+
+                <!-- Reboot System -->
+                <button
+                    type="button"
+                    class="p-4 rounded-full focus:outline-none"
+                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
+                    x-on:click="poweroffSelectionText = 'Rebooting...'"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                    </svg>
+                </button>
+
+                <!-- Poweroff System -->
+                <button
+                    type="button"
+                    class="p-4 rounded-full focus:outline-none"
+                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
+                    x-on:click="poweroffSelectionText = 'Shutting down...'"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 6a7.75 7.75 0 1 0 10 0" />
+                        <line x1="12" y1="4" x2="12" y2="12" />
+                    </svg>
+                </button>
+
+                <!-- Cancel -->
+                <a 
+                    href="javascript:void(0)"
+                    class="absolute bottom-6 text-white p-2"
+                    x-on:click.prevent="isPoweroffScreenVisible = false"
+                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
+                    x-text="poweroffSelectionText">
+                </a>
+            </div>
         </div>
     </div>
 
 
     <!-- JS Files -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
     <script src="assets/js/vue2.min.js"></script>
+    <script src="assets/js/alpine.js"></script>
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script type="text/javascript">
