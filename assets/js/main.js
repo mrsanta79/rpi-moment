@@ -127,7 +127,6 @@ let app = new Vue({
             this.loadingData = true;
             this.getTodayInfo();
             this.getCurrentWeather();
-            this.getCryptoRates();
 
             setTimeout(() => {
                 this.loadingData = false;
@@ -135,3 +134,26 @@ let app = new Vue({
         }
     }
 });
+
+// JS Functions
+// const $brightnessSliderWrapper = document.getElementById('brightness-slider-wrapper');
+// const brightnessSlider = document.getElementById('brightness-slider');
+
+// let isTapped = false,
+//     tappedPosition = 0;
+
+// $brightnessSliderWrapper.addEventListener('touchstart', function(event) {
+//     isTapped = true;
+//     tappedPosition = event.targetTouches[0].clientY;
+//     console.log(tappedPosition);
+// });
+// $brightnessSliderWrapper.addEventListener('touchmove', function(event) {
+//     if (isTapped) {
+//         const height = tappedPosition - event.targetTouches[0].clientY;
+//         console.log(height);
+//         brightnessSlider.style.height = `${height}px`;
+//     }
+// });
+// $brightnessSliderWrapper.addEventListener('touchend', function(event) {
+//     isTapped = false;
+// });

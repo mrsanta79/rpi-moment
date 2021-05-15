@@ -48,19 +48,6 @@
             <div class="grid grid-cols-3 gap-3 h-full">
                 <!-- Clock -->
                 <div class="col-span-2 flex flex-col justify-center items-center border-2 rounded p-2 relative">
-                    <!-- Refresh Button -->
-                    <button
-                        type="button"
-                        id="refresh-data"
-                        class="absolute top-1 left-1 text-white p-1 rounded-full focus:outline-none"
-                        v-bind:class="loadingData ? 'animate' : null"
-                        v-on:click.prevent="refreshData()"
-                    >
-                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                    </button>
-                    
                     <!-- No network -->
                     <svg v-if="!network.isConnected" class="icon icon-tabler icon-tabler-wifi-off absolute top-1 right-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -97,14 +84,12 @@
                 <!-- Control Center -->
                 <div class="flex flex-row border-2 rounded p-2 relative">
                     <div class="flex flex-col w-1/2 mr-1">
-                        <!-- Alarm Button-->
-                        <button type="button" class="btn-control-center active bg-gray-600 rounded-lg p-2 mb-1 h-1/2 inline-flex justify-center items-center focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm w-8 h-8" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Reload Button-->
+                        <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 mb-1 h-1/2 inline-flex justify-center items-center focus:outline-none" id="refresh-data" v-bind:class="loadingData ? 'animate' : null" v-on:click.prevent="refreshData()">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh w-8 h-8" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <circle cx="12" cy="13" r="7" />
-                                <polyline points="12 10 12 13 14 13" />
-                                <line x1="7" y1="4" x2="4.25" y2="6" />
-                                <line x1="17" y1="4" x2="19.75" y2="6" />
+                                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
                             </svg>
                         </button>
 
