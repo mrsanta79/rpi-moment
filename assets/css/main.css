@@ -33,6 +33,10 @@ body,
     transition: top 0.5s ease-in-out;
 }
 
+#refresh-data svg {
+    transform: rotate(180deg);
+}
+
 #refresh-data.animate svg {
     -webkit-animation: spin 1s linear 1;
     -moz-animation: spin 1s linear 1;
@@ -86,36 +90,36 @@ body,
 
 @-webkit-keyframes spin {
     from {
-        transform: rotate(360deg);
+        transform: rotate(180deg);
     }
     to {
-        transform: rotate(0deg);
+        transform: rotate(540deg);
     }
 }
 
 @-moz-keyframes spin {
     from {
-        transform: rotate(360deg);
+        transform: rotate(180deg);
     }
     to {
-        transform: rotate(0deg);
+        transform: rotate(540deg);
     }
 }
 
 @-o-keyframes spin {
     from {
-        transform: rotate(360deg);
+        transform: rotate(180deg);
     }
     to {
-        transform: rotate(0deg);
+        transform: rotate(540deg);
     }
 }
 
 @keyframes spin {
     from {
-        transform: rotate(360deg);
+        transform: rotate(180deg);
     }
     to {
-        transform: rotate(0deg);
+        transform: rotate(540deg);
     }
 }
