@@ -81,6 +81,33 @@
                     <h3 class="text-2xl text-white mt-3" v-cloak>{{ current.date }}</h3>
                 </div>
 
+                <!-- Weather -->
+                <div class="flex flex-col justify-center items-center border-2 rounded p-2">
+                    <div class="flex flex-row justify-center items-center">
+                        <img class="w-12 h-12" v-cloak v-bind:src="current.tempIcon">
+                        <h3 class="text-xl text-white ml-1 mt-1" v-cloak>{{ current.temp }} <sup>&deg;C</sup></h3>
+                    </div>
+                    <h6 class="text-base text-white mt-2" v-cloak>{{ current.tempType }}</h6>
+                    <h6 class="text-xs text-white mt-3" v-cloak>Sunrise: {{ current.sunrise }}</h6>
+                    <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ current.sunset }}</h6>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="mt-3 grid grid-cols-3 gap-3 h-full">
+                
+                <!-- Upcoming weather -->
+                <div class="col-span-2 flex flex-col justify-center items-center border-2 rounded p-2 relative">
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="flex flex-col p-1 text-center items-center" v-if="upcoming" v-for="day in upcoming">
+                            <h4 class="text-sm text-white" v-cloak>{{ day.day }}</h4>
+                            <img class="w-10 h-10" v-cloak v-bind:src="day.tempIcon">
+                            <h3 class="text-sm text-white mt-1 whitespace-nowrap" v-cloak>{{ day.tempMin }} &deg; - {{ day.tempMax }} <sup>&deg;C</sup></h3>
+                            <h6 class="text-sm text-white mt-1" v-cloak>{{ day.tempType }}</h6>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Control Center -->
                 <div class="flex flex-row border-2 rounded p-2 relative">
                     <div class="flex flex-col w-1/2 mr-1">
@@ -105,33 +132,6 @@
                     <!-- Brightness Control-->
                     <div class="h-full w-1/2 rounded-lg ml-1 relative brightness-wrapper-control-center" id="brightness-slider-wrapper">
                         <span class="block w-full bg-white rounded-lg absolute bottom-0" id="brightness-slider"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottom Row -->
-            <div class="mt-3 grid grid-cols-3 gap-3 h-full">
-
-                <!-- Weather -->
-                <div class="flex flex-col justify-center items-center border-2 rounded p-2">
-                    <div class="flex flex-row justify-center items-center">
-                        <img class="w-12 h-12" v-cloak v-bind:src="current.tempIcon">
-                        <h3 class="text-xl text-white ml-1 mt-1" v-cloak>{{ current.temp }} <sup>&deg;C</sup></h3>
-                    </div>
-                    <h6 class="text-base text-white mt-2" v-cloak>{{ current.tempType }}</h6>
-                    <h6 class="text-xs text-white mt-3" v-cloak>Sunrise: {{ current.sunrise }}</h6>
-                    <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ current.sunset }}</h6>
-                </div>
-                
-                <!-- Upcoming weather -->
-                <div class="col-span-2 flex flex-col justify-center items-center border-2 rounded p-2 relative">
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="flex flex-col p-1 text-center items-center" v-if="upcoming" v-for="day in upcoming">
-                            <h4 class="text-sm text-white" v-cloak>{{ day.day }}</h4>
-                            <img class="w-10 h-10" v-cloak v-bind:src="day.tempIcon">
-                            <h3 class="text-sm text-white mt-1 whitespace-nowrap" v-cloak>{{ day.tempMin }} &deg; - {{ day.tempMax }} <sup>&deg;C</sup></h3>
-                            <h6 class="text-sm text-white mt-1" v-cloak>{{ day.tempType }}</h6>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -167,11 +167,12 @@
             </div>
 
             <!-- Poweroff Screen -->
-            <div class="fixed inset-0 bg-red z-10 flex flex-row justify-evenly items-center" id="poweroff-screen" x-show.transition.opacity.scale="isPoweroffScreenVisible">
+            <div class="fixed inset-0 bg-red z-10 flex flex-row justify-evenly items-center" id="poweroff-screen" x-show.transition.opacity="isPoweroffScreenVisible">
                 <!-- Exit System -->
                 <button
                     type="button"
                     class="p-4 rounded-full focus:outline-none"
+                    x-show.transition.scale="isPoweroffScreenVisible"
                     x-bind:disabled="poweroffSelectionText !== 'Cancel'"
                     x-on:click="poweroffSelectionText = 'Exiting...'"
                 >
@@ -186,6 +187,7 @@
                 <button
                     type="button"
                     class="p-4 rounded-full focus:outline-none"
+                    x-show.transition.scale="isPoweroffScreenVisible"
                     x-bind:disabled="poweroffSelectionText !== 'Cancel'"
                     x-on:click="poweroffSelectionText = 'Rebooting...'"
                 >
@@ -200,6 +202,7 @@
                 <button
                     type="button"
                     class="p-4 rounded-full focus:outline-none"
+                    x-show.transition.scale="isPoweroffScreenVisible"
                     x-bind:disabled="poweroffSelectionText !== 'Cancel'"
                     x-on:click="poweroffSelectionText = 'Shutting down...'"
                 >
