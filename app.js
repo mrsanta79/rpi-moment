@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
+const exec = require('child_process').exec;
 require('dotenv').config();
 
 // Initialize app
@@ -17,6 +18,32 @@ app.use('/assets', express.static(path.join(__dirname, '/assets')));
 // Routes
 app.get('/', (req, res) => {
     res.status(200).render('index');
+});
+
+app.get('/poweroff/:type', (req, res) => {
+    const type = req.params.type;
+
+    if (type === '' || typeof type === 'undefined') {
+        return;
+    }
+
+    let command = '';
+    if (type === 'poweroff') {
+        command = '--poweroff';
+    } else if (type === 'reboot') {
+        command = '--reboot';
+    }
+
+    exec(`poweroff ${command}`, (err, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+    })
 });
 
 app.use((req, res) => {

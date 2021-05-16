@@ -123,6 +123,17 @@ let app = new Vue({
                     console.log(err);
                 })
         },
+        poweroff: function(type) {
+            const url = `${window.location.origin}/poweroff/${type}`;
+
+            setTimeout(() => {
+                fetch(url)
+                    .then(data => data.json())
+                    .then(response => {
+                        console.log(response);
+                    });
+            }, 2000);
+        },
         refreshData: function() {
             this.loadingData = true;
             this.getTodayInfo();

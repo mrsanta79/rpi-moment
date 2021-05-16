@@ -190,6 +190,7 @@
                     x-show.transition.scale="isPoweroffScreenVisible"
                     x-bind:disabled="poweroffSelectionText !== 'Cancel'"
                     x-on:click="poweroffSelectionText = 'Rebooting...'"
+                    v-on:click="poweroff('reboot')"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -205,6 +206,7 @@
                     x-show.transition.scale="isPoweroffScreenVisible"
                     x-bind:disabled="poweroffSelectionText !== 'Cancel'"
                     x-on:click="poweroffSelectionText = 'Shutting down...'"
+                    v-on:click="poweroff('poweroff')"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
