@@ -1,3 +1,4 @@
+// Vue
 let app = new Vue({
     el: '#app',
     data: {
@@ -146,25 +147,25 @@ let app = new Vue({
     }
 });
 
+// Variables
+const $brightnessSliderWrapper = document.getElementById('brightness-slider-wrapper');
+const brightnessSlider = document.getElementById('brightness-slider');
+
 // JS Functions
-// const $brightnessSliderWrapper = document.getElementById('brightness-slider-wrapper');
-// const brightnessSlider = document.getElementById('brightness-slider');
+window.addEventListener('DOMContentLoaded', function() {
+    // Resize brightness slider
+    initializeBrightnessSlider();
+    brightnessControl();
 
-// let isTapped = false,
-//     tappedPosition = 0;
+    // Brightness control
+    brightnessSlider.addEventListener('input', brightnessControl);
+});
 
-// $brightnessSliderWrapper.addEventListener('touchstart', function(event) {
-//     isTapped = true;
-//     tappedPosition = event.targetTouches[0].clientY;
-//     console.log(tappedPosition);
-// });
-// $brightnessSliderWrapper.addEventListener('touchmove', function(event) {
-//     if (isTapped) {
-//         const height = tappedPosition - event.targetTouches[0].clientY;
-//         console.log(height);
-//         brightnessSlider.style.height = `${height}px`;
-//     }
-// });
-// $brightnessSliderWrapper.addEventListener('touchend', function(event) {
-//     isTapped = false;
-// });
+const initializeBrightnessSlider = function() {
+    brightnessSlider.style.height = `${$brightnessSliderWrapper.offsetWidth}px`;
+    brightnessSlider.style.width = `${$brightnessSliderWrapper.offsetHeight - 2}px`;
+}
+
+const brightnessControl = function() {
+    document.getElementById('app').style.filter = `brightness(${brightnessSlider.value}%)`;
+}
