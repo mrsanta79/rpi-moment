@@ -1,10 +1,8 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
-const bodyParser = require('body-parser');
-
-// Environment Variables
-const APP_PORT = 3000
+const exec = require('child_process').exec;
+require('dotenv').config();
 
 // Initialize app
 const app = express();
@@ -19,11 +17,38 @@ app.use('/assets', express.static(path.join(__dirname, '/assets')));
 
 // Routes
 app.get('/', (req, res) => {
-    const data = {
-        test: 'Hello'
-    };
+    res.status(200).render('index');
+});
 
-    res.status(200).render('index', data);
-})
+app.get('/poweroff/:type', (req, res) => {
+    const type = req.params.type;
 
-app.listen(APP_PORT);
+    if (type === '' || typeof type === 'undefined') {
+        return;
+    }
+
+    let command = '';
+    if (type === 'poweroff') {
+        command = '--poweroff';
+    } else if (type === 'reboot') {
+        command = '--reboot';
+    }
+
+    exec(`poweroff ${command}`, (err, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+    })
+});
+
+app.use((req, res) => {
+    res.status(404).send('Route not found!');
+});
+
+// Start server
+app.listen(process.env.APP_PORT || 3000);
