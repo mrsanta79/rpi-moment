@@ -62,10 +62,10 @@ let app = new Vue({
         getTodayInfo: function() {
             const today = new Date();
             const day = moment(today).format('ddd');
-            const date = moment(today).format('MMM Do YYYY');
+            const date = moment(today).format('MMM Do, YYYY');
             const time = moment(today).format('hh : mm A');
 
-            this.current.date = day + ', ' + date;
+            this.current.date = `${day}, ${date}`;
             this.current.time = time;
 
             // Get upcoming days
@@ -164,8 +164,12 @@ window.addEventListener('DOMContentLoaded', function() {
 const initializeBrightnessSlider = function() {
     brightnessSlider.style.height = `${$brightnessSliderWrapper.offsetWidth}px`;
     brightnessSlider.style.width = `${$brightnessSliderWrapper.offsetHeight - 2}px`;
+
+    const brightness = window.localStorage.getItem('brightness');
+    brightnessSlider.value = brightness;
 }
 
 const brightnessControl = function() {
     document.getElementById('app').style.filter = `brightness(${brightnessSlider.value}%)`;
+    window.localStorage.setItem('brightness', brightnessSlider.value);
 }

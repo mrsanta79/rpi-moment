@@ -21,7 +21,11 @@
 
 <body>
 
-    <div class="min-h-screen bg-gradient-to-r from-purple-400 to-green-400" id="app" x-data="{ isPoweroffScreenVisible: false, poweroffSelectionText: 'Cancel' }">
+    <div class="min-h-screen bg-gradient-to-r from-purple-400 to-green-400" id="app" x-data="{
+            isPoweroffScreenVisible: false,
+            poweroffSelectionText: 'Cancel',
+            brightness: 80
+        }">
         <!-- Screen Loader -->
         <div id="loader" class="fixed top-0 left-0 right-0 h-full z-50 flex flex-col justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background: transparent;display:block;" width="150px" height="150px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -42,10 +46,10 @@
         </div>
 
         <!-- Body -->
-        <div class="flex flex-col h-screen p-3 border-box">
-            
+        <div class="flex flex-col h-screen p-2 border-box">
+
             <!-- Top Row -->
-            <div class="grid grid-cols-3 gap-3 h-full">
+            <div class="grid grid-cols-3 gap-2 h-full">
                 <!-- Clock -->
                 <div class="col-span-2 flex flex-col justify-center items-center border-2 rounded p-2 relative">
                     <!-- No network -->
@@ -94,8 +98,8 @@
             </div>
 
             <!-- Bottom Row -->
-            <div class="mt-3 grid grid-cols-3 gap-3 h-full">
-                
+            <div class="mt-2 grid grid-cols-3 gap-2 h-full">
+
                 <!-- Upcoming weather -->
                 <div class="col-span-2 flex flex-col justify-center items-center border-2 rounded p-2 relative">
                     <div class="grid grid-cols-3 gap-3">
@@ -137,12 +141,7 @@
             </div>
 
             <!-- Network Connection Notifier -->
-            <div 
-                id="network-notifier" 
-                class="fixed bottom-0 left-0 right-0 h-20 text-white text-lg border-t-2 border-white flex flex-col justify-center items-center"
-                v-cloak
-                v-bind:class="network.notifierVisible ? 'visible' : ''"
-            >
+            <div id="network-notifier" class="fixed bottom-0 left-0 right-0 h-20 text-white text-lg border-t-2 border-white flex flex-col justify-center items-center" v-cloak v-bind:class="network.notifierVisible ? 'visible' : ''">
                 <div class="flex flex-col items-center justify-center" v-if="!network.isConnected">
                     <svg class="icon icon-tabler icon-tabler-wifi-off w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -169,13 +168,7 @@
             <!-- Poweroff Screen -->
             <div class="fixed inset-0 bg-red z-10 flex flex-row justify-evenly items-center" id="poweroff-screen" x-show.transition.opacity="isPoweroffScreenVisible">
                 <!-- Exit System -->
-                <button
-                    type="button"
-                    class="p-4 rounded-full focus:outline-none"
-                    x-show.transition.scale="isPoweroffScreenVisible"
-                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
-                    x-on:click="poweroffSelectionText = 'Exiting...'"
-                >
+                <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Exiting...'">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
@@ -184,14 +177,7 @@
                 </button>
 
                 <!-- Reboot System -->
-                <button
-                    type="button"
-                    class="p-4 rounded-full focus:outline-none"
-                    x-show.transition.scale="isPoweroffScreenVisible"
-                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
-                    x-on:click="poweroffSelectionText = 'Rebooting...'"
-                    v-on:click="poweroff('reboot')"
-                >
+                <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Rebooting...'" v-on:click="poweroff('reboot')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
@@ -200,14 +186,7 @@
                 </button>
 
                 <!-- Poweroff System -->
-                <button
-                    type="button"
-                    class="p-4 rounded-full focus:outline-none"
-                    x-show.transition.scale="isPoweroffScreenVisible"
-                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
-                    x-on:click="poweroffSelectionText = 'Shutting down...'"
-                    v-on:click="poweroff('poweroff')"
-                >
+                <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Shutting down...'" v-on:click="poweroff('poweroff')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M7 6a7.75 7.75 0 1 0 10 0" />
@@ -216,12 +195,7 @@
                 </button>
 
                 <!-- Cancel -->
-                <a 
-                    href="javascript:void(0)"
-                    class="absolute bottom-6 text-white p-2"
-                    x-on:click.prevent="isPoweroffScreenVisible = false"
-                    x-bind:disabled="poweroffSelectionText !== 'Cancel'"
-                    x-text="poweroffSelectionText">
+                <a href="javascript:void(0)" class="absolute bottom-6 text-white p-2" x-on:click.prevent="isPoweroffScreenVisible = false" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-text="poweroffSelectionText">
                 </a>
             </div>
         </div>
@@ -236,7 +210,7 @@
     <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', (event) => {
             const $pageLoader = document.getElementById('loader');
-            
+
             setTimeout(() => {
                 $pageLoader.style.top = '-' + document.body.clientHeight + 'px';
                 setTimeout(() => {
