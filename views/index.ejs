@@ -16,7 +16,7 @@
 
     <!-- CSS FIles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
 </head>
 
 <body>
@@ -32,11 +32,11 @@
                 <g transform="translate(50 50)">
                     <g ng-attr-transform="scale(0.8)">
                         <g transform="translate(-50 -50)">
-                            <path fill="#f05454" stroke="#e15b64" stroke-width="0" d="M50,14c19.85,0,36,16.15,36,36S69.85,86,50,86S14,69.85,14,50S30.15,14,50,14 M50,10c-22.091,0-40,17.909-40,40 s17.909,40,40,40s40-17.909,40-40S72.091,10,50,10L50,10z"></path>
-                            <path fill="#f05454" d="M52.78,42.506c-0.247-0.092-0.415-0.329-0.428-0.603L52.269,40l-0.931-21.225C51.304,18.06,50.716,17.5,50,17.5 s-1.303,0.56-1.338,1.277L47.731,40l-0.083,1.901c-0.013,0.276-0.181,0.513-0.428,0.604c-0.075,0.028-0.146,0.063-0.22,0.093V44h6 v-1.392C52.925,42.577,52.857,42.535,52.78,42.506z">
+                            <path fill="#fff" stroke="#aaa" stroke-width="0" d="M50,14c19.85,0,36,16.15,36,36S69.85,86,50,86S14,69.85,14,50S30.15,14,50,14 M50,10c-22.091,0-40,17.909-40,40 s17.909,40,40,40s40-17.909,40-40S72.091,10,50,10L50,10z"></path>
+                            <path fill="#fff" d="M52.78,42.506c-0.247-0.092-0.415-0.329-0.428-0.603L52.269,40l-0.931-21.225C51.304,18.06,50.716,17.5,50,17.5 s-1.303,0.56-1.338,1.277L47.731,40l-0.083,1.901c-0.013,0.276-0.181,0.513-0.428,0.604c-0.075,0.028-0.146,0.063-0.22,0.093V44h6 v-1.392C52.925,42.577,52.857,42.535,52.78,42.506z">
                                 <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="0.4166666666666667s"></animateTransform>
                             </path>
-                            <path fill="#f05454" d="M58.001,48.362c-0.634-3.244-3.251-5.812-6.514-6.391c-3.846-0.681-7.565,1.35-9.034,4.941 c-0.176,0.432-0.564,0.717-1.013,0.744l-15.149,0.97c-0.72,0.043-1.285,0.642-1.285,1.383c0,0.722,0.564,1.321,1.283,1.363 l15.153,0.971c0.447,0.027,0.834,0.312,1.011,0.744c1.261,3.081,4.223,5.073,7.547,5.073c2.447,0,4.744-1.084,6.301-2.975 C57.858,53.296,58.478,50.808,58.001,48.362z M50,53.06c-1.688,0-3.06-1.373-3.06-3.06s1.373-3.06,3.06-3.06s3.06,1.373,3.06,3.06 S51.688,53.06,50,53.06z">
+                            <path fill="#fff" d="M58.001,48.362c-0.634-3.244-3.251-5.812-6.514-6.391c-3.846-0.681-7.565,1.35-9.034,4.941 c-0.176,0.432-0.564,0.717-1.013,0.744l-15.149,0.97c-0.72,0.043-1.285,0.642-1.285,1.383c0,0.722,0.564,1.321,1.283,1.363 l15.153,0.971c0.447,0.027,0.834,0.312,1.011,0.744c1.261,3.081,4.223,5.073,7.547,5.073c2.447,0,4.744-1.084,6.301-2.975 C57.858,53.296,58.478,50.808,58.001,48.362z M50,53.06c-1.688,0-3.06-1.373-3.06-3.06s1.373-3.06,3.06-3.06s3.06,1.373,3.06,3.06 S51.688,53.06,50,53.06z">
                                 <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.6666666666666667s"></animateTransform>
                             </path>
                         </g>
@@ -46,12 +46,15 @@
         </div>
 
         <!-- Body -->
-        <div class="flex flex-col h-screen p-2 border-box">
+        <div
+            class="flex flex-col divide-y-2 border-2 border-box m-2"
+            style="height: calc(100vh - 1rem)"
+        >
 
             <!-- Top Row -->
-            <div class="grid grid-cols-3 gap-2 h-full">
+            <div class="grid grid-cols-3 divide-x-2 h-full">
                 <!-- Clock -->
-                <div class="col-span-2 flex flex-col justify-center items-center border-2 rounded p-2 relative">
+                <div class="col-span-2 flex flex-col justify-center items-center p-2 relative">
                     <!-- No network -->
                     <svg v-if="!network.isConnected" class="icon icon-tabler icon-tabler-wifi-off absolute top-1 right-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -81,27 +84,41 @@
                     </svg> -->
 
                     <!-- Time and Date -->
-                    <h1 class="text-4xl text-white f-inter mt-3" v-cloak>{{ current.time }}</h1>
+                    <h1 class="text-4xl text-white font-primary mt-3" v-cloak>{{ current.time }}</h1>
                     <h3 class="text-2xl text-white mt-3" v-cloak>{{ current.date }}</h3>
                 </div>
 
                 <!-- Weather -->
-                <div class="flex flex-col justify-center items-center border-2 rounded p-2">
+                <div class="flex flex-col justify-center items-center p-2">
                     <div class="flex flex-row justify-center items-center">
                         <img class="w-12 h-12" v-cloak v-bind:src="current.tempIcon">
                         <h3 class="text-xl text-white ml-1 mt-1" v-cloak>{{ current.temp }} <sup>&deg;C</sup></h3>
                     </div>
-                    <h6 class="text-base text-white mt-2" v-cloak>{{ current.tempType }}</h6>
-                    <h6 class="text-xs text-white mt-3" v-cloak>Sunrise: {{ current.sunrise }}</h6>
-                    <h6 class="text-xs text-white mt-1" v-cloak>Sunset: {{ current.sunset }}</h6>
+
+                    <!-- Temperature -->
+                    <h6 class="text-base font-bold text-white mt-1" v-cloak>{{ current.tempType }}</h6>
+
+                    <!-- Sunrise and Sunset -->
+                    <h6 class="text-sm text-white mt-3 flex flex-row items-center gap-2" v-cloak>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                        </svg>
+                        {{ current.sunrise }}
+                    </h6>
+                    <h6 class="mt-1 text-sm text-white mt-3 flex flex-row items-center gap-2" v-cloak>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                        </svg>
+                        {{ current.sunset }}
+                    </h6>
                 </div>
             </div>
 
             <!-- Bottom Row -->
-            <div class="mt-2 grid grid-cols-3 gap-2 h-full">
+            <div class="grid grid-cols-3 divide-x-2 h-full">
 
                 <!-- Upcoming weather -->
-                <div class="col-span-2 flex flex-col justify-center items-center border-2 rounded p-2 relative">
+                <div class="col-span-2 flex flex-col justify-center items-center p-2 relative">
                     <div class="grid grid-cols-3 gap-3">
                         <div class="flex flex-col p-1 text-center items-center" v-if="upcoming" v-for="day in upcoming">
                             <h4 class="text-sm text-white" v-cloak>{{ day.day }}</h4>
@@ -113,10 +130,10 @@
                 </div>
 
                 <!-- Control Center -->
-                <div class="flex flex-row border-2 rounded p-2 relative">
-                    <div class="flex flex-col w-1/2 mr-1">
+                <div class="grid grid-cols-2 gap-2 p-2 relative">
+                    <div class="flex flex-col gap-2">
                         <!-- Reload Button-->
-                        <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 mb-1 h-1/2 inline-flex justify-center items-center focus:outline-none" id="refresh-data" v-bind:class="loadingData ? 'animate' : null" v-on:click.prevent="refreshData()">
+                        <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 h-1/2 flex justify-center items-center focus:outline-none" id="refresh-data" v-bind:class="loadingData ? 'animate' : null" v-on:click.prevent="refreshData()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise w-8 h-8" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5" />
@@ -124,7 +141,7 @@
                         </button>
 
                         <!-- Shutdown Button-->
-                        <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 mt-1 h-1/2 inline-flex justify-center items-center focus:outline-none" x-on:click.prevent="isPoweroffScreenVisible = true">
+                        <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 h-1/2 flex justify-center items-center focus:outline-none" x-on:click.prevent="isPoweroffScreenVisible = true">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power w-8 h-8" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M7 6a7.75 7.75 0 1 0 10 0" />
@@ -134,7 +151,7 @@
                     </div>
 
                     <!-- Brightness Control-->
-                    <div class="h-full w-1/2 rounded-lg ml-1 relative flex justify-center items-center brightness-wrapper-control-center" id="brightness-slider-wrapper">
+                    <div class="h-full rounded-lg relative flex justify-center items-center brightness-wrapper-control-center" id="brightness-slider-wrapper">
                         <input type="range" id="brightness-slider" name="brightness-slider" class="rounded-lg" value="80" min="5" max="100" step="1">
                     </div>
                 </div>
@@ -206,7 +223,7 @@
     <script src="assets/js/vue2.min.js"></script>
     <script src="assets/js/alpine.js"></script>
     <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/app.js"></script>
     <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', (event) => {
             const $pageLoader = document.getElementById('loader');

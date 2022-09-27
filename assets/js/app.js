@@ -162,11 +162,9 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 const initializeBrightnessSlider = function() {
-    brightnessSlider.style.height = `${$brightnessSliderWrapper.offsetWidth}px`;
-    brightnessSlider.style.width = `${$brightnessSliderWrapper.offsetHeight - 2}px`;
-
     const brightness = window.localStorage.getItem('brightness');
     brightnessSlider.value = brightness;
+    brightnessSlider.style.width = `${$brightnessSliderWrapper.offsetHeight}px`;
 }
 
 const brightnessControl = function() {
