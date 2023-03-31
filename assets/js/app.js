@@ -38,7 +38,7 @@ let app = new Vue({
             this.getTodayInfo();
         }, 1000);
 
-        // Check Internet connection availablity
+        // Check Internet connection availability
         window.addEventListener('offline', (event) => {
             this.network.isConnected = false;
             this.network.notifierVisible = true;
