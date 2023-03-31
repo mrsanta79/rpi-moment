@@ -25,12 +25,12 @@ let app = new Vue({
     created() {
         this.getTodayInfo();
         this.getCurrentWeather();
-        this.getUpcomingWheather();
+        this.getUpcomingWeather();
 
         // Fetch weather data every 60 minutes
         setInterval(() => {
             this.getCurrentWeather();
-            this.getUpcomingWheather();
+            this.getUpcomingWeather();
         }, 1000 * 60 * 60);
 
         // Fetch time every second
@@ -99,7 +99,7 @@ let app = new Vue({
                     console.log(err);
                 })
         },
-        getUpcomingWheather: function() {
+        getUpcomingWeather: function() {
             const API_KEY = document.querySelector('meta[name=weather-api-key]').getAttribute('content');
             const CITY = document.querySelector('meta[name=location-city]').getAttribute('content');
 
