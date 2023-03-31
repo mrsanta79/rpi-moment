@@ -53,10 +53,18 @@
 
             <!-- Top Row -->
             <div class="grid grid-cols-3 divide-x-2 h-full">
+
                 <!-- Clock -->
                 <div class="col-span-2 flex flex-col justify-center items-center p-2 relative">
+
+                    <!-- Bluetooth -->
+                    <!-- <svg class="absolute top-1 right-8 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <polyline points="7 8 17 16 12 20 12 4 17 8 7 16" />
+                    </svg> -->
+
                     <!-- No network -->
-                    <svg v-if="!network.isConnected" class="icon icon-tabler icon-tabler-wifi-off absolute top-1 right-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg v-if="!network.isConnected" class="absolute top-1 right-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <line x1="12" y1="18" x2="12.01" y2="18" />
                         <path d="M9.172 15.172a4 4 0 0 1 5.656 0" />
@@ -66,7 +74,7 @@
                     </svg>
 
                     <!-- Network avilable -->
-                    <svg v-if="network.isConnected" class="icon icon-tabler icon-tabler-wifi absolute top-1 right-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg v-if="network.isConnected" class="absolute top-1 right-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <line x1="12" y1="18" x2="12.01" y2="18" />
                         <path d="M9.172 15.172a4 4 0 0 1 5.656 0" />
@@ -184,6 +192,7 @@
 
             <!-- Poweroff Screen -->
             <div class="fixed inset-0 bg-red z-10 flex flex-row justify-evenly items-center" id="poweroff-screen" x-show.transition.opacity="isPoweroffScreenVisible">
+
                 <!-- Exit System -->
                 <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Exiting...'">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
