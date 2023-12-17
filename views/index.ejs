@@ -139,6 +139,12 @@
 
                 <!-- Control Center -->
                 <div class="grid grid-cols-2 gap-2 p-2 relative">
+
+                    <!-- Brightness Control-->
+                    <div class="h-full rounded-lg relative flex justify-center items-center brightness-wrapper-control-center" id="brightness-slider-wrapper">
+                        <input type="range" id="brightness-slider" name="brightness-slider" class="rounded-lg" value="80" min="5" max="100" step="1">
+                    </div>
+
                     <div class="flex flex-col gap-2">
                         <!-- Reload Button-->
                         <button type="button" class="btn-control-center bg-gray-600 rounded-lg p-2 h-1/2 flex justify-center items-center focus:outline-none" id="refresh-data" v-bind:class="loadingData ? 'animate' : null" v-on:click.prevent="refreshData()">
@@ -156,11 +162,6 @@
                                 <line x1="12" y1="4" x2="12" y2="12" />
                             </svg>
                         </button>
-                    </div>
-
-                    <!-- Brightness Control-->
-                    <div class="h-full rounded-lg relative flex justify-center items-center brightness-wrapper-control-center" id="brightness-slider-wrapper">
-                        <input type="range" id="brightness-slider" name="brightness-slider" class="rounded-lg" value="80" min="5" max="100" step="1">
                     </div>
                 </div>
             </div>
@@ -194,31 +195,42 @@
             <div class="fixed inset-0 bg-red z-10 flex flex-row justify-evenly items-center" id="poweroff-screen" x-show.transition.opacity="isPoweroffScreenVisible">
 
                 <!-- Exit System -->
-                <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Exiting...'">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                        <path d="M7 12h14l-3 -3m0 6l3 -3" />
-                    </svg>
-                </button>
+                <!--
+                <div class='flex flex-col gap-2 items-center'>
+                    <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Exiting...'">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                            <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                        </svg>
+                    </button>
+                    <h6 class='text-center text-white font-bold'>Exit</h6>
+                </div>
+                -->
 
                 <!-- Reboot System -->
-                <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Rebooting...'" v-on:click="poweroff('reboot')">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
-                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
-                    </svg>
-                </button>
+                <div class='flex flex-col gap-2 items-center'>
+                    <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Rebooting...'" v-on:click="poweroff('reboot')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                            <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                        </svg>
+                    </button>
+                    <h6 class='text-center text-white font-bold'>Reboot</h6>
+                </div>
 
                 <!-- Poweroff System -->
-                <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Shutting down...'" v-on:click="poweroff('poweroff')">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M7 6a7.75 7.75 0 1 0 10 0" />
-                        <line x1="12" y1="4" x2="12" y2="12" />
-                    </svg>
-                </button>
+                <div class='flex flex-col gap-2 items-center'>
+                    <button type="button" class="p-4 rounded-full focus:outline-none" x-show.transition.scale="isPoweroffScreenVisible" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-on:click="poweroffSelectionText = 'Shutting down...'" v-on:click="poweroff('poweroff')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power w-16 h-16" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7 6a7.75 7.75 0 1 0 10 0" />
+                            <line x1="12" y1="4" x2="12" y2="12" />
+                        </svg>
+                    </button>
+                    <h6 class='text-center text-white font-bold'>PowerOff</h6>
+                </div>
 
                 <!-- Cancel -->
                 <a href="javascript:void(0)" class="absolute bottom-6 text-white p-2" x-on:click.prevent="isPoweroffScreenVisible = false" x-bind:disabled="poweroffSelectionText !== 'Cancel'" x-text="poweroffSelectionText">
